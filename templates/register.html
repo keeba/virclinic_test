@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+ <form action="" method="post" role="form" class="form-signin" style="max-width:660px;">
+	  <h2 class="form-signin-heading" style="margin-bottom:20px;">Create an account</h2>
+	  {% csrf_token %}
+	  {% if form.errors %}
+	    <p class="text-danger">
+		  {% for field in form %}
+			  {% for error in field.errors %}
+	          	<strong>{{ error|escape }}</strong>
+	      	  {% endfor %}
+		  {% endfor %}
+	    </p	>
+	  {% endif %}
+	  
+	  <div class="col-sm-5" style="margin-left:-15px;">
+	  	<label for="id_username" class="sr-only">Email:</label> 
+	  	<input id="id_username" maxlength="100" name="username" type="text" class="form-control" placeholder="User Name" required> 
+
+	  	<label for="id_password1" class="sr-only">Password:</label> 
+	 	 <input id="id_password1" name="password1" type="password" class="form-control" placeholder="Password" required>
+
+	 	 <label for="id_password2" class="sr-only">Password confirmation:</label> 
+	 	 <input id="id_password2" name="password2" type="password" class="form-control" placeholder="Password confirmation" required> 
+  	  </div>
+	  <div class="col-sm-5 col-sm-offset-1">
+	  	<label for="id_email" class="sr-only">Email:</label> 
+	 	 <input id="id_email" name="email" type="email" class="form-control" placeholder="Email" required>
+	  
+	 	 <label for="id_first_name" class="sr-only">First Name:</label> 
+	 	 <input id="id_first_name" name="first_name" type="text" class="form-control" placeholder="First Name" required>
+	  
+	  	<label for="id_last_name" class="sr-only">Last Name:</label> 
+	  	<input id="id_last_name" name="last_name" type="text" class="form-control" placeholder="Last Name" required>
+	  	
+	  </div>
+	  <div class="col-sm-10 text-center" style="margin-top:20px;">
+		<input type="submit" class="btn btn-primary btn-lg" value="Create the account">
+	  </div>	  
+
+  </form>
+
+{% endblock %}

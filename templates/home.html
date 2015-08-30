@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+
+{% block main %}
+	<p>Welcome {{ request.user.first_name|title }}</p>
+{% endblock %}

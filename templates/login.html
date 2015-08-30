@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+	  {% if form.errors %}
+	       <p class="error">Sorry, that's not a valid username or password</p>
+	  {% endif %}
+		
+      <form class="form-signin" role="form" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+		{% if login_error %}
+			<p class="text-danger"><strong>Invalid User Name or Password</strong></p>
+		{% endif %}
+		{% csrf_token %}
+        <label for="inputUsername" class="sr-only">Email address</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="User Name" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+		  </label>
+		  <label>
+			  <a href="/forgot_password">Forgot Password?</a>
+		  </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+{% endblock %}
