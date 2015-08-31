@@ -4,3 +4,4 @@ dj-database-url==0.3.0
 django-postgrespool==0.3.0
 gunicorn==19.1.1
 psycopg2==2.5.4
+whitenoise==1.0.3
