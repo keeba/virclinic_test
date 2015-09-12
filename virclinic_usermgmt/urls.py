@@ -16,4 +16,4 @@ urlpatterns = patterns('',
     url(r'^$',views.root),
     url(r'^home/$',views.home),
     url(r'^users/([0-9]+)$',views.users),
-)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)
