@@ -112,10 +112,7 @@ LOGIN_URL = '/login/'
 DATABASES['default'] =  dj_database_url.config()
 
 # Enable Connection Pooling (if desired)
-#DATABASES['default']['ENGINE'] = 'django_postgrespool'
-#DATABASES['default']['NAME'] = 'virclinic_test'
+DATABASES['default']['ENGINE'] = 'django_postgrespool'
+DATABASES['default']['NAME'] = 'virclinic_test'
 
 
-BUCKET_NAME = 'vcapp'
-AWS_ACCESS_KEY_ID = 'AKIAI4T3KNFUL5K4LEIQ'
-AWS_SECRET_ACCESS_KEY = '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'
