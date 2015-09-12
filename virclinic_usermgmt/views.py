@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 import shutil
+from django.conf import settings
 
 FILE_UPLOAD_DIR = 'static/'
 
@@ -60,15 +61,36 @@ def register(request):
 def home(request):
     return render_to_response('home.html', context_instance=RequestContext(request))
     
-def handle_uploaded_file(source,user_id):
-    filepath = FILE_UPLOAD_DIR + 'user-'+str(user_id)+'.jpeg'
-    print(filepath)
-    with open(filepath, 'wb') as dest:
-        shutil.copyfileobj(source, dest)
-    return filepath  
 def users(request,id):
-    print(request.POST)
-    if request.POST:
-        print(request.FILES['myfile'])
-        handle_uploaded_file(request.FILES['myfile'],request.user.id)
-    return render_to_response('users.html', context_instance=RequestContext(request))          
+    if request.POST and 'myfile' in request.FILES:
+        push_picture_to_s3(request.FILES['myfile'],request.user.id)
+    return render(request,'users.html',{})   
+    
+def push_picture_to_s3(source,id):
+    try:
+        import boto
+        from boto.s3.key import Key
+        # set boto lib debug to critical
+        bucket_name = settings.BUCKET_NAME
+        print(bucket_name+'worked')
+        # connect to the bucket
+        conn = boto.connect_s3(settings.AWS_ACCESS_KEY_ID,settings.AWS_SECRET_ACCESS_KEY)
+        bucket = conn.get_bucket(bucket_name)
+        print(conn)
+        print(settings.AWS_ACCESS_KEY_ID)
+        # go through each version of the file
+        key = 'user-%s.png' % id
+        print(key)
+        #    fn = '/var/www/data/%s.png' % id
+        # create a key to keep track of our file in the storage
+        k = Key(bucket)
+        k.key = key
+        k.set_contents_from_file(source)
+        # we need to make it public so it can be accessed publicly
+        # using a URL like http://s3.amazonaws.com/bucket_name/key
+        k.make_public()
+        # remove the file from the web server
+    except:
+        print('error')
+        pass
+         
