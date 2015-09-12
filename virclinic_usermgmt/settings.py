@@ -114,5 +114,5 @@ LOGIN_URL = '/login/'
 DATABASES['default'] =  dj_database_url.config()
 
 # Enable Connection Pooling (if desired)
-DATABASES['default']['ENGINE'] = 'django_postgrespool'
-DATABASES['default']['NAME'] = 'virclinic_test'
+#DATABASES['default']['ENGINE'] = 'django_postgrespool'
+#DATABASES['default']['NAME'] = 'virclinic_test'
