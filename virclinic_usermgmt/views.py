@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+import shutil
+
+FILE_UPLOAD_DIR = '/Users/apple/virclinic_usermgmt/media/'
 
 @login_required
 def root(request):
@@ -56,3 +59,16 @@ def register(request):
 @login_required
 def home(request):
     return render_to_response('home.html', context_instance=RequestContext(request))
+    
+def handle_uploaded_file(source,user_id):
+    filepath = FILE_UPLOAD_DIR + 'user-'+str(user_id)+'.jpeg'
+    print(filepath)
+    with open(filepath, 'wb') as dest:
+        shutil.copyfileobj(source, dest)
+    return filepath  
+def users(request,id):
+    print(request.POST)
+    if request.POST:
+        print(request.FILES['myfile'])
+        handle_uploaded_file(request.FILES['myfile'],request.user.id)
+    return render_to_response('users.html', context_instance=RequestContext(request))          
