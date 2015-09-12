@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 import shutil
 
-FILE_UPLOAD_DIR = '/Users/apple/virclinic_usermgmt/media/'
+FILE_UPLOAD_DIR = 'media/'
 
 @login_required
 def root(request):
