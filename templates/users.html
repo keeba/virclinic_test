@@ -22,18 +22,14 @@
 	    <div class="col-sm-3">
 			<div class="form-group">
 				<div class="form-group">
-					<img src="/static/user-{{ request.user.id}}.jpeg" class="profile-pic"></img>
+					<img src="https://vcapp.s3.amazonaws.com/user-{{ request.user.id }}.png" class="profile-pic"></img>
 				</div>	
 				<div class="form-group">
-					<input type="file" name="myfile" accept=".jpg,.jpeg,.png,.gif,.bmp"/>
+					<input type="file" name="myfile" id="myfile" accept=".jpg,.jpeg,.png,.gif,.bmp"/>
 				</div>	
 			</div>
 		</div>			
 	    <div class="col-sm-3 col-sm-offset-1">
-			<div class="form-group">
-	  			<label for="id_username">User Name</label> 
-				<input id="id_username" maxlength="30" name="username" type="text" value="{% firstof form.username.value request.user.username %}" class="form-control" required> 
-			</div>
 			<div class="form-group">
 	  			<label for="id_email">Email</label> 
 				<input id="id_email" name="email" type="email" class="form-control" required value="{% firstof form.email.value request.user.email %}">
