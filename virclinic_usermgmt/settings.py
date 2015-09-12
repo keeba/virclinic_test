@@ -94,7 +94,6 @@ USE_TZ = True
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 MEDIA_ROOT = 'media'
@@ -115,5 +114,5 @@ LOGIN_URL = '/login/'
 DATABASES['default'] =  dj_database_url.config()
 
 # Enable Connection Pooling (if desired)
-#DATABASES['default']['ENGINE'] = 'django_postgrespool'
-#DATABASES['default']['NAME'] = 'virclinic_test'
+DATABASES['default']['ENGINE'] = 'django_postgrespool'
+DATABASES['default']['NAME'] = 'virclinic_test'
